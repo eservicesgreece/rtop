@@ -255,7 +255,7 @@ Processes:
     %s%s%s running of %s%s%s total
 
 Memory:
-    free    = %s%s%s
+    free    = %s%s%s free of %s%s%s
     used    = %s%s%s
     buffers = %s%s%s
     cached  = %s%s%s
@@ -277,6 +277,7 @@ Memory:
 		escBrightWhite, stats.RunningProcs, escReset,
 		escBrightWhite, stats.TotalProcs, escReset,
 		escBrightWhite, fmtBytes(stats.MemFree), escReset,
+		escBrightWhite, fmtBytes(stats.MemTotal), escReset,
 		escBrightWhite, fmtBytes(used), escReset,
 		escBrightWhite, fmtBytes(stats.MemBuffers), escReset,
 		escBrightWhite, fmtBytes(stats.MemCached), escReset,
@@ -287,6 +288,7 @@ Memory:
 		fmt.Println("Filesystems:")
 		for _, fs := range stats.FSInfos {
 			fmt.Fprintf(output, "    %s%8s%s: %s%s%s free of %s%s%s\n",
+				escBrightWhite, fs.Device, escReset,
 				escBrightWhite, fs.MountPoint, escReset,
 				escBrightWhite, fmtBytes(fs.Free), escReset,
 				escBrightWhite, fmtBytes(fs.Used+fs.Free), escReset,
